@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nearby Food & Hotels</title>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta name="description" content="Find the nearest food spots within 5km instantly without signup. Get directions and details with just one click on FoodNearMe.food." />
+  <meta name="keywords" content="food near me, nearby restaurants, find food, food spots, local food, food map, restaurant finder,find food near me,nearby food delivery,food spots near me,restaurants near me,food near me map,local food near me,nearest restaurants,quick food near me,food delivery near me,find restaurants near me without login,how to find restaurants quickly,easy food finder tool,local food discovery website,best food locator 2025,restaurants with delivery near me,instant food map for hungry people,food finder app alternative,discover food nearby fast,
+  food near me in New York,
+
+restaurants near me in New York,
+
+nearby food spots in New York,
+
+find food near me in Los Angeles,
+
+restaurants near me in Los Angeles,
+
+food delivery near me in Los Angeles,
+
+food near me in Chicago,
+
+best restaurants near me in Chicago,
+
+food spots near me in Houston,
+
+find nearby food in Houston,
+
+food near me in London,
+
+restaurants near me in London,
+
+local food near me in London,
+
+food near me in Paris,
+
+nearby restaurants in Paris,
+
+find food spots in Paris,
+
+food near me in Tokyo,
+
+restaurants near me in Tokyo,
+
+quick food near me in Tokyo,
+
+food near me in Mumbai,
+
+best restaurants near me in Mumbai,
+
+find food near me in Mumbai,
+
+food near me in Sydney,
+
+restaurants near me in Sydney,
+
+nearby food spots in Sydney,
+
+food near me in Toronto,
+
+restaurants near me in Toronto,
+
+local food near me in Toronto,
+
+food near me in Dubai,
+
+restaurants near me in Dubai,
+
+nearby food spots in Dubai,
+
+food near me in Berlin,
+
+restaurants near me in Berlin,
+
+food delivery near me in Berlin,
+
+food near me in Barcelona,
+
+restaurants near me in Barcelona,
+
+find nearby food in Barcelona" />
+  <meta name="author" content="FoodNearMe Team" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://foodnearme.food" />
+  <meta property="og:title" content="FoodNearMe.food – Find Nearby Food in One Click" />
+  <meta property="og:description" content="Find the nearest food spots within 5km instantly without signup. Get directions and details with just one click." />
+  <meta property="og:image" content="https://foodnearme.food/Screenshot" />
+
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://foodnearme.food" />
+  <meta property="twitter:title" content="FoodNearMe.food – Find Nearby Food in One Click" />
+  <meta property="twitter:description" content="Find the nearest food spots within 5km instantly without signup. Get directions and details with just one click." />
+  <meta property="twitter:image" content="https://foodnearme.food/preview-image.png" />
+
+  <title>FoodNearMe - Find Food Near You Easily</title>
+  <link rel="icon" href="Screenshot from 2025-05-21 21-44-39.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 150vh;
+    }
+    header {
+      width: 100%;
+      overflow: hidden;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #ffffff;
+    }
+    .header-img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .find-btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10px;
+      flex-wrap: wrap;
+    }
+    #find-btn {
+      background: rgb(255, 255, 255);
+      color: rgb(109, 108, 108);
+      box-shadow: 2px 2px 2px 2px rgb(199, 199, 199);
+      border: none;
+      width: 200px;
+      height: 50px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s ease;
+      text-align: center;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-weight: bolder;
+    }
+    #status {
+      text-align: center;
+      margin: 10px;
+      font-weight: lighter;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #map {
+      height: 800px;
+      width: 100%;
+      flex: 1;
+    }
+    .popup-btn {
+      margin-top: 5px;
+      display: inline-block;
+      padding: 6px 10px;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(98, 153, 255);
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    footer {
+      background-color: #000000;
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+    }
+    footer a {
+      color: rgb(179, 255, 0);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  
+  <link rel="canonical" href="https://foodnearme.food" />
+</head>
+<body>
+  <header>
+    <img src="Screenshot from 2025-05-21 21-44-39.png" alt="Header Banner" class="header-img" />
+  </header>
+  
+  <div class="find-btn-container">
+    <button id="find-btn" onclick="confirmLocationPermission()">🍔 Food Near Me</button>
+  </div>
+
+  <div id="status">Click the button to find nearby Foods.</div>
+  <div id="map"></div>
+
+  <footer>
+    <p>&copy; 2025 <strong>Food Near Me</strong>. All rights reserved.</p>
+    <p>Made with ❤️ using 
+      <a href="https://leafletjs.com/" target="_blank">Leaflet</a> &amp; 
+      <a href="https://www.geoapify.com/" target="_blank">Geoapify</a>
+    </p>
+    <p>
+      <a href="about.html">About Us</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="privacy.html">Privacy Policy</a>|
+      <a href="terms.html">Terms Of Service</a>|
+      <a href="faqs.html">FAQs</a>
+    </p>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+
+  <script>
+    const apiKey = '095fc927e47e425cac17b5f0e2c3d7a6';
+    let map, markerGroup, routingControl;
+    let userLocation = null;
+
+    function initMap(lat, lon) {
+      if (map) {
+        map.setView([lat, lon], 14);
+        return;
+      }
+      map = L.map('map').setView([lat, lon], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+      }).addTo(map);
+      markerGroup = L.layerGroup().addTo(map);
+    }
+
+    function confirmLocationPermission() {
+      const confirmed = confirm("This site uses your location to find food places near you. Do you allow location access?");
+      if (confirmed) {
+        findRestaurants();
+      } else {
+        document.getElementById("status").textContent = "❌ Location permission denied.";
+      }
+    }
+
+    async function findRestaurants() {
+      const status = document.getElementById("status");
+      status.textContent = "Getting your location...";
+
+      if (!navigator.geolocation) {
+        status.textContent = "Geolocation not supported.";
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        userLocation = { lat, lon };
+
+        initMap(lat, lon);
+        markerGroup.clearLayers();
+
+        L.circleMarker([lat, lon], {
+          radius: 8,
+          color: "#1976d2",
+          fillColor: "rgb(179, 255, 0)",
+          fillOpacity: 1
+        }).addTo(map).bindPopup("📍 You are here").openPopup();
+
+        status.textContent = "Finding Foods nearby...";
+
+        const url = `https://api.geoapify.com/v2/places?categories=catering&filter=circle:${lon},${lat},4000&bias=proximity:${lon},${lat}&limit=100&apiKey=${apiKey}`;
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (!data.features.length) {
+            status.textContent = "No foods found.";
+            return;
+          }
+
+          const categoryImages = {
+            restaurant: "https://img.icons8.com/color/96/restaurant.png",
+            cafe: "https://img.icons8.com/color/96/cafe.png",
+            fast_food: "https://img.icons8.com/color/96/hamburger.png",
+            bar: "https://img.icons8.com/color/96/cocktail.png",
+            bakery: "https://img.icons8.com/color/96/bread.png",
+            ice_cream: "https://img.icons8.com/color/96/ice-cream.png",
+            juice: "https://img.icons8.com/color/96/orange-juice.png",
+            pub: "https://img.icons8.com/color/96/beer.png",
+            pizzeria: "https://img.icons8.com/color/96/pizza.png",
+            deli: "https://img.icons8.com/color/96/sandwich.png"
+          };
+
+          data.features.forEach((place) => {
+            const props = place.properties;
+            const name = props.name || "Unnamed";
+            const address = props.formatted || "No address";
+            const placeLat = props.lat;
+            const placeLon = props.lon;
+
+
+const website = place.properties.website;
+const phone = place.properties.phone;
+const openingHours = place.properties.opening_hours;
+
+
+            const category = (props.categories?.[0] || "").split(".").pop().toLowerCase();
+            const imageUrl = categoryImages[category] || categoryImages["restaurant"];
+
+            const distance = L.latLng(userLocation.lat, userLocation.lon)
+                              .distanceTo([placeLat, placeLon]);
+            const distanceInKm = (distance / 1000).toFixed(2);
+
+            const marker = L.marker([placeLat, placeLon]);
+
+            marker.on("click", () => {
+              if (routingControl) map.removeControl(routingControl);
+              routingControl = L.Routing.control({
+                waypoints: [
+                  L.latLng(userLocation.lat, userLocation.lon),
+                  L.latLng(placeLat, placeLon),
+                ],
+                routeWhileDragging: false,
+                show: false,
+                addWaypoints: false,
+                lineOptions: {
+                  styles: [{ color: 'rgb(98, 153, 255)', weight: 5 }],
+                }
+              }).addTo(map);
+            });
+            const popupContent = `
+  <div style="text-align:center;font-family:Arial;">
+    <img src="${imageUrl}" alt="${category}" width="60" height="60" style="margin-bottom:8px;"/><br/>
+    <strong style="font-size:16px;">${name}</strong><br/>
+    <div style="margin-top:4px;">${address}</div>
+    ${website ? `<div style="margin-top:4px;"><a href="${website}" target="_blank">🌐 Website</a></div>` : ''}
+    ${phone ? `<div style="margin-top:4px;">📞 ${phone}</div>` : ''}
+    ${openingHours ? `<div style="margin-top:4px;">🕒 ${openingHours}</div>` : ''}
+    <div style="margin-top:4px;">📏 ${distanceInKm} km</div>
+  </div>
+`;
+
+            marker.bindPopup(popupContent);
+            markerGroup.addLayer(marker);
+          });
+
+          status.textContent = "✅ Food places loaded successfully.";
+        } catch (err) {
+          console.error(err);
+          status.textContent = "❌ Failed to fetch data.";
+        }
+      }, () => {
+        status.textContent = "❌ Location access denied.";
+      });
+    }
+  </script>
+</body>
+</html>

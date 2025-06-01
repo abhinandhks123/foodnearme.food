@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FAQ - FoodNearMe.food</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+  .question {
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px;
+  }
+  .question::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    font-weight: 700;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+  .faq-item.active .question::after {
+    content: '-';
+    transform: rotate(180deg);
+  }
+  .answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    margin-top: 10px;
+    color: #555;
+  }
+  .faq-item.active .answer {
+    max-height: 300px; /* adjust as needed */
+  }
+  @media (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Frequently Asked Questions</h1>
+
+  <div class="faq-item">
+    <div class="question">Can I find food near me without signing up?</div>
+    <div class="answer">Yes, no login or signup is needed.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Does the site show nearby restaurants on a map?</div>
+    <div class="answer">Yes, within 5 km radius.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Can I use it on my phone?</div>
+    <div class="answer">Yes, fully mobile-friendly.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Are all restaurant details free?</div>
+    <div class="answer">No, only basic info is free; more details require paid listing.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Is my location data safe?</div>
+    <div class="answer">Yes, we only use it to show nearby places, no storing or sharing.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Can I get directions to the restaurant?</div>
+    <div class="answer">Yes, routing from your location is available.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Does FoodNearMe.food deliver food?</div>
+    <div class="answer">No, we only help you find and navigate to food spots.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question">Can I suggest a restaurant to add?</div>
+    <div class="answer">Yes, use our feedback form to suggest or report.</div>
+  </div>
+
+</div>
+
+<script>
+  const faqs = document.querySelectorAll('.faq-item');
+
+  faqs.forEach(faq => {
+    faq.querySelector('.question').addEventListener('click', () => {
+      faq.classList.toggle('active');
+    });
+  });
+</script>
+
+</body>
+</html>

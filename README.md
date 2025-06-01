@@ -1,1 +1,2 @@
-# foodnearme.food
+# FoodNearMe
+Find the food nearest place
